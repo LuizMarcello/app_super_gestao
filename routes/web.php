@@ -18,13 +18,18 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get('/', 'PrincipalController@principal'); /* Versão 7.0 do láravel */
-/* Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);  Versão 8.0 do láravel */
+/* Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);
+  Versão 8.0 do láravel */
 
 Route::get('/sobre-nos', 'SobreNosController@sobreNos'); /* Versão 7.0 do láravel */
-/* Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos']);  Versão 8.0 do láravel */
+/* Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos']);
+  Versão 8.0 do láravel */
 
 Route::get('/contato', 'ContatoController@contato'); /* Versão 7.0 do láravel */
-/* Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);  Versão 8.0 do láravel */
+/* Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
+  Versão 8.0 do láravel */
 
-/* Desmembramento:
-   Route::get($uri, $callback){} - $uri:O caminho(rota) e $callback: Uma ação a ser executada. */
+  Route::get('/login', function(){ return 'Login'; });
+  Route::get('/clientes', function(){ return 'Clientes'; });
+  Route::get('/fornecedores', function(){ return 'fornecedores'; });
+  Route::get('/produtos', function(){ return 'produtos'; });
