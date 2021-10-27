@@ -42,23 +42,14 @@ Route::prefix('/app')->group(function() {
     Route::get('/produtos', function(){ return 'produtos'; })->name('app.produtos');
 });
 
-//Redirecionamento de rotas:
-Route::get('/rota1', function(){
-    echo 'Rota 1';
-})->name('site.rota1');
-
-Route::get('rota2', function(){
-    return redirect()->route('site.rota1');
-})->name('site.rota2');
-
-/*
-Route::redirect('/rota2','rota1');
-*/
+//Encaminhando parâmetros da rota para o controlador:
+Route::get('/teste/{p1}/{p2}','TesteController@teste')->name('teste');
 
 //Rota de contingência(fallback): Será fornecida
 //caso a rota informada não seja encontrada.
 Route::fallback(function() {
-    echo 'A rota acessada não existe. <a href="'.route('site.index').'">Clique aqui</a> para ir para página inicial.';
+    echo 'A rota acessada não existe. <a href="'.route('site.index').'">Clique aqui</a> para ir
+    para página inicial.';
 });
 
 
