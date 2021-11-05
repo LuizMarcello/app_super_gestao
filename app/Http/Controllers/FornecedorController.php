@@ -48,7 +48,8 @@ class FornecedorController extends Controller
         /* return view('app.fornecedor.index@for', compact('fornecedores')); */
         /* return view('app.fornecedor.index@while', compact('fornecedores')); */
         /* return view('app.fornecedor.index@foreach', compact('fornecedores')); */
-       /*  return view('app.fornecedor.index@forelse', compact('fornecedores')); */
-        return view('app.fornecedor.index@esctagimpressao', compact('fornecedores'));
+        /* return view('app.fornecedor.index@forelse', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@esctagimpressao', compact('fornecedores')); */
+        return view('app.fornecedor.index@loop', compact('fornecedores'));
     }
 }
