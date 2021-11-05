@@ -35,13 +35,20 @@ class FornecedorController extends Controller
             ]
         ];
 
+       /*  $fornecedores = []; */
+
         /* return view('app.fornecedor.index', compact('fornecedores')); */
         /* return view('app.fornecedor.index@if@else', compact('fornecedores')); */
         /* return view('app.fornecedor.index@unless', compact('fornecedores')); */
         /* return view('app.fornecedor.index@isset', compact('fornecedores')); */
-        /*  return view('app.fornecedor.index@empty', compact('fornecedores')); */
-        /*  return view('app.fornecedor.index@ternario', compact('fornecedores')); */
-        /*  return view('app.fornecedor.index@valordefault', compact('fornecedores')); */
-        return view('app.fornecedor.index@switchcase', compact('fornecedores'));
+        /* return view('app.fornecedor.index@empty', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@ternario', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@valordefault', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@switchcase', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@for', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@while', compact('fornecedores')); */
+        /* return view('app.fornecedor.index@foreach', compact('fornecedores')); */
+       /*  return view('app.fornecedor.index@forelse', compact('fornecedores')); */
+        return view('app.fornecedor.index@esctagimpressao', compact('fornecedores'));
     }
 }
