@@ -31,8 +31,11 @@ Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos'); 
 Route::get('/contato', 'ContatoController@contato')->name('site.contato'); /* Versão 7.0 do láravel */
 /* Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
+Route::post('/contato', 'ContatoController@contato')->name('site.contato'); /* Versão 7.0 do láravel */
+/* Route::post('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
+  Versão 8.0 do láravel */
 
-  
+
 Route::get('/login', function(){ return 'Login'; })->name('site.login');
 
 //Agrupando essas rotas. Serão "privadas" no sistema.

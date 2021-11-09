@@ -14,8 +14,11 @@
         <div class="informacao-pagina">
             <div class="contato-principal">
                 {{-- O método "GET" envia as informações pela "url".
-                     Para formar a "url", usa-se os "names" dos inputs: --}}
-                <form action={{ route('site.contato') }} method="GET">
+                     Para formar a "url", usa-se os campos "names" dos inputs: --}}
+                {{-- O láravel exige que todos os formulários enviados via
+                     verbo http "POST"(rota no web.php), tenham um "token" --}}
+                <form action={{ route('site.contato') }} method="POST">
+                    @csrf  {{-- token --}}
                     <input name="nome" type="text" placeholder="Nome" class="borda-preta">
                     <br>
                     <input name="telefone" type="text" placeholder="Telefone" class="borda-preta">
