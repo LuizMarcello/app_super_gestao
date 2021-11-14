@@ -5,6 +5,10 @@
 
 {{-- Envio de "bloco html" para o template extendido --}}
 @section('conteudo')
+
+    {{-- Incluindo esta partialView aqui, ou direto no template --}}
+   {{--  @include('site.layouts._partialsViews.topo') --}}
+
     <div class="conteudo-pagina">
         <div class="titulo-pagina">
             <h1>Olá, eu sou o Super Gestão</h1>

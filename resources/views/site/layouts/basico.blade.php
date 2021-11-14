@@ -1,3 +1,4 @@
+{{-- Este é um "template" --}}
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,8 +9,8 @@
 </head>
 
 <body>
-     {{-- Incluindo aqui neste ponto, a partial view "topo.blade.php" --}}
-     @include('site.layouts._partialsViews.topo')
+    {{-- Incluindo aqui neste ponto, a partial view "topo.blade.php" --}}
+    @include('site.layouts._partialsViews.topo')
 
     {{-- Indica, aqui no template extendido, onde os blocos html
          das "sections" das views, devem ser reinderizados --}}

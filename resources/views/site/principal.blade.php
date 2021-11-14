@@ -6,6 +6,10 @@
 
 {{-- Envio de "bloco html" para o template extendido --}}
 @section('conteudo')
+
+    {{-- Incluindo esta partialView aqui, ou direto no template --}}
+    {{-- @include('site.layouts._partialsViews.topo') --}}
+
     <div class="conteudo-destaque">
 
         <div class="esquerda">
@@ -33,8 +37,11 @@
                 <h1>Contato</h1>
                 <p>Caso tenha qualquer dúvida por favor entre em contato com nossa equipe pelo formulário abaixo.
                 <p>
-
-                    @component('site.layouts._components.form_contato')
+                    {{-- Incluindo este componente aqui --}}
+                     {{-- Enviando parâmetros específicos adicionais para este componente,
+                          agora por aqui, através da "chamada do componente, como segundo
+                          parâmetro, usando um array associativo": --}} {{-- Esta classe já existe no css --}}
+                    @component('site.layouts._components.form_contato', ['classe' => 'borda-branca'])
                     @endcomponent
 
             </div>
