@@ -26,6 +26,8 @@ class CreateProdutoDetalhesTable extends Migration
 
             $table->timestamps();
 
+            //Relacionamentom um-para-um
+
             //Constraints
             $table->foreign('produto_id')->references('id')->on('produtos');
             //Garante que um único produto tenha apenas um produto_detalhes.
