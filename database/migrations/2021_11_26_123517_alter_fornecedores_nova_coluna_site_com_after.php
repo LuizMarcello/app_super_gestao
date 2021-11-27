@@ -18,7 +18,7 @@ class AlterFornecedoresNovaColunaSiteComAfter extends Migration
             /* Métodos de criação das colunas, dependendo dos seus tipos. */
             /* Utilizando o modificador de colunas "after", para posicionar
                a nova coluna após a coluna "nome", já existente.
-               Utilizando também o modificador "nullable" encadeado. */
+               Utilizando também o modificador "nullable", encadeado. */
             $table->string('site', 150)->after('nome')->nullable();
         });
     }
