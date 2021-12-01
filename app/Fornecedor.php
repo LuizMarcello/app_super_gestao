@@ -14,6 +14,6 @@ class Fornecedor extends Model
 
     //Autoriza o método estático "::create()" a fazer a inserção de registros
     //no banco de dados, através de um array associativo.
-    //Atributo "#fillable":
+    //Atributo "$fillable":
     protected $fillable = ['nome', 'site', 'uf', 'email'];
 }
