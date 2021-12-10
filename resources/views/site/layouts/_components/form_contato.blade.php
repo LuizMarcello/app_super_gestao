@@ -10,6 +10,8 @@
 {{ $slot }}
 {{-- Variável "$classe": adiciona no local, neste componente, os parâqmetros
      na "chamada do componente", na view blade especifica. --}}
+{{-- Importante: O request usa como chave do input lá no back-end,
+     o campo "name" do formulário.Por este campo que os parâmetros são associados. --}}
 <form action={{ route('site.contato') }} method="POST">
     @csrf {{-- token --}}
     <input name="nome" type="text" placeholder="Nome" class="{{ $classe }}">
@@ -29,3 +31,13 @@
     <br>
     <button type="submit" class="borda-preta">ENVIAR</button>
 </form>
+
+{{-- No contexto das views, existe a variável "$errors", que fica dísponível
+     de modo automático, para qualquer view. O próprio laravel faz o input
+     automático desta variável nas views --}}
+
+<div style="position: absolute; top:0px; left:0px; width:100%; background:red">
+    <pre>
+        {{ print_r($errors) }}
+    </pre>
+</div>

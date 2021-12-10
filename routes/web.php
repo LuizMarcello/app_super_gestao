@@ -31,7 +31,7 @@ Route::get('/contato', 'ContatoController@contato')->name('site.contato'); /* Ve
 /* Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
 
-Route::post('/contato', 'ContatoController@contato')->name('site.contato'); /* Versão 7.0 do láravel */
+Route::post('/contato', 'ContatoController@salvar')->name('site.contato'); /* Versão 7.0 do láravel */
 /* Route::post('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
 
