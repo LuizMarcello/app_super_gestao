@@ -14,11 +14,12 @@
      o campo "name" do formulário.Por este campo que os parâmetros são associados. --}}
 <form action={{ route('site.contato') }} method="POST">
     @csrf {{-- token --}}
-    <input name="nome" type="text" placeholder="Nome" class="{{ $classe }}">
+    <input name="nome" value="{{ old('nome') }}" type="text" placeholder="Nome" class="{{ $classe }}">
     <br>
-    <input name="telefone" type="text" placeholder="Telefone" class="{{ $classe }}">
+    <input name="telefone" value="{{ old('telefone') }}" type="text" placeholder="Telefone"
+        class="{{ $classe }}">
     <br>
-    <input name="email" type="text" placeholder="E-mail" class="{{ $classe }}">
+    <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="{{ $classe }}">
     <br>
     <select name="motivo_contato" class="{{ $classe }}">
         <option value="">Qual o motivo do contato?</option>
@@ -27,7 +28,8 @@
         <option value="3">Reclamação</option>
     </select>
     <br>
-    <textarea name="mensagem" class="{{ $classe }}">Preencha aqui a sua mensagem</textarea>
+    <textarea name="mensagem" class="{{ $classe }}">
+        {{ old('mensagem') != '' ? old('mensagem') : 'Preencha aqui sua mensagem' }}</textarea>
     <br>
     <button type="submit" class="borda-preta">ENVIAR</button>
 </form>

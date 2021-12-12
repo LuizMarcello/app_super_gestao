@@ -59,15 +59,17 @@ class ContatoController extends Controller
     }
 
     //Se a requisição vier pelo método "POST"(formulário), cai neste método:
-    public function salvar(Request $request) {
+    public function salvar(Request $request)
+    {
         //Antes do láravel dar êrros, precisamos realizar a validação
         //dos dados do formulário recebidos no request, neste ponto.
         $request->validate([
-            'nome' => 'required',
+            'nome' => 'required|min:3|max:40', //Caracteres: min.3 e max.40
             'telefone' => 'required',
             'email' => 'required',
             'motivo_contato' => 'required',
-            'mensagem' => 'required'
+            'mensagem' => 'required|max:1000'
+
         ]);
         /* SiteContato::create($request->all()); */
     }
