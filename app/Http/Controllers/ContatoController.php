@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SiteContato;
+use App\MotivoContato;
 
 class ContatoController extends Controller
 {
@@ -55,7 +56,10 @@ class ContatoController extends Controller
         // Também baseado num array associativo.
         /* $contato->create($request->all()); */
 
-        return view('site.contato', ['titulo' => 'Contato(teste)']);
+        //Recuperando os dados do banco de dados.
+        $motivo_contatos = MotivoContato::all();
+
+        return view('site.contato', ['titulo' => 'Contato(teste)', 'motivo_contatos' => $motivo_contatos]);
     }
 
     //Se a requisição vier pelo método "POST"(formulário), cai neste método:

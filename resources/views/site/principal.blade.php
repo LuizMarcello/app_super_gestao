@@ -41,7 +41,8 @@
                      {{-- Enviando parâmetros específicos adicionais para este componente,
                           agora por aqui, através da "chamada do componente, como segundo
                           parâmetro, usando um array associativo": --}} {{-- Esta classe já existe no css --}}
-                    @component('site.layouts._components.form_contato', ['classe' => 'borda-branca'])
+                    @component('site.layouts._components.form_contato', ['classe' => 'borda-branca',
+                    'motivo_contatos' => $motivo_contatos])
                     @endcomponent
 
             </div>

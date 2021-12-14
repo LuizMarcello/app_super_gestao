@@ -21,8 +21,9 @@
                 {{-- Incluindo este componente aqui --}}
                 {{-- Enviando parâmetros específicos adicionais para este componente,
                      agora por aqui, através da "chamada do componente, como segundo
-                     parâmetro, usando um array associativo": --}} {{-- Esta classe já existe no css --}}
-                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta'])
+                     parâmetro, usando um array associativo": --}} {{-- Esta classe já existe no css--}}
+                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta',
+                 'motivo_contatos' => $motivo_contatos])
                     {{-- Enviando por aqui parâmetros específicos adicionais para este componente:
                      Neste caso, uma codificação html necessária --}}
                     <p>Analizaremos a sua mensagem o mais breve possível.</p>
@@ -32,6 +33,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="rodape">
         <div class="redes-sociais">
