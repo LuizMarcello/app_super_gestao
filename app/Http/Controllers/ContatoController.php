@@ -70,11 +70,15 @@ class ContatoController extends Controller
         $request->validate([
             'nome' => 'required|min:3|max:40', //Caracteres: min.3 e max.40
             'telefone' => 'required',
-            'email' => 'required',
-            'motivo_contato' => 'required',
+            /* 'email' => 'required' */
+            'email' => 'email',
+            'motivo_contatos_id' => 'required',
             'mensagem' => 'required|max:1000'
 
         ]);
-        /* SiteContato::create($request->all()); */
+
+        SiteContato::create($request->all());
+        //Após a persistência dos dados, redireciona para a página raiz da aplicação.
+        return redirect()->route('site.index');
     }
 }
