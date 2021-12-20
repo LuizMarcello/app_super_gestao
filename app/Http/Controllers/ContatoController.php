@@ -65,19 +65,39 @@ class ContatoController extends Controller
     //Se a requisição vier pelo método "POST"(formulário), cai neste método:
     public function salvar(Request $request)
     {
-        //Antes do láravel dar êrros, precisamos realizar a validação
-        //dos dados do formulário recebidos no request, neste ponto.
-        $request->validate([
-            'nome' => 'required|min:3|max:40', //Caracteres: min.3 e max.40
+        //Um array associativo
+        $regras = [
+            'nome' => 'required|min:3|max:40|unique:site_contatos', //Caracteres: min.3 e max.40
             'telefone' => 'required',
             /* 'email' => 'required' */
             'email' => 'email',
             'motivo_contatos_id' => 'required',
             'mensagem' => 'required|max:1000'
+        ];
 
-        ]);
+        //Um array associativo
+        $feedback = [
+            'nome.min' => 'O campo nome precisa ter no mínimo 3 caracteres.',
+            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
+            'nome.unique' => 'O nome informado já está em uso',
+            'email.email' => 'O campo e-mail precisa ser preenchido com um e-mail válido',
+            'mensagem.max' => 'O campo mensagem deve ter no máximo 1000 caractéres.',
 
+            /* Genérica */
+            /* As mensagens específicadas para cada mensagem acima, sobrepõe as genéricas abaixo */
+            'required' => 'O campo :attribute deve ser preenchido'
+        ];
+
+        //Antes do láravel dar êrros, precisamos realizar a validação
+        //dos dados do formulário recebidos no request, neste ponto.
+        /* Como 1º parâmetro do validate(): Um array associativo com as regras de validação */
+        /* Como 2º parâmetro do validate(), outro array associativo com as mensagens de feedback
+           que devem ser atribuidas para cada campo nas mensagens de êrro  */
+        $request->validate($regras, $feedback);
+
+        //Após a validação, fazendo então a persistência dos dados no bd.
         SiteContato::create($request->all());
+
         //Após a persistência dos dados, redireciona para a página raiz da aplicação.
         return redirect()->route('site.index');
     }
