@@ -20,10 +20,10 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 //Essas rotas são "publicas" no sistema:
 //São rotas "nomeadas"
-//Atribuindo um middleware a esta rota.
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/', 'PrincipalController@principal')
-    ->name('site.index'); /* Versão 7.0 do láravel */
+//Atribuindo a chamada deste middleware diretamente na rota.
+/* Route::middleware(LogAcessoMiddleware::class) */
+
+Route::get('/', 'PrincipalController@principal')->name('site.index'); /* Versão 7.0 do láravel */
 /* Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);
   Versão 8.0 do láravel */
 
@@ -31,7 +31,9 @@ Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos'); 
 /* Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos']);
   Versão 8.0 do láravel */
 
-Route::middleware(LogAcessoMiddleware::class)->get('/contato', 'ContatoController@contato')->name('site.contato'); /* Versão 7.0 do láravel */
+//Atribuindo a chamada deste middleware diretamente na rota.
+Route::get('/contato', 'ContatoController@contato')->name('site.contato');
+    /* ->middleware(LogAcessoMiddleware::class); */ /* Versão 7.0 do láravel */
 /* Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
 
@@ -39,9 +41,7 @@ Route::post('/contato', 'ContatoController@salvar')->name('site.contato'); /* Ve
 /* Route::post('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
 
-Route::get('/login', function () {
-    return 'Login';
-})->name('site.login');
+Route::get('/login', function () {return 'Login';})->name('site.login');
 
 //Agrupando essas rotas. Serão "privadas" no sistema.
 //Acrescentando o prefixo "app" no agrupamento.

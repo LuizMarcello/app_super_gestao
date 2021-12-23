@@ -16,7 +16,7 @@ class LogAcessoMiddleware
      */
     public function handle($request, Closure $next)
     {
-        /* Manipulando o "$request" recebido por parâmetro do navegador ou de outra plicação */
+        /* Manipulando o "$request" recebido por parâmetro do navegador ou de outra aplicação */
         /* O método $next() "empurra" a requisição pra frente. */
         // return $next($request);
         /* Manipulando o "response" devolvido ao navegador ou a outra aplicação */

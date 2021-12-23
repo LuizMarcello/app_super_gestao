@@ -4,6 +4,8 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+//ESta classe é responsável por iniciar diversos middlewares e definir
+//estes middlewares para grupo de rotas dentro da aplicação.
 class Kernel extends HttpKernel
 {
     /**
@@ -12,6 +14,7 @@ class Kernel extends HttpKernel
      * These middleware are run during every request to your application.
      *
      * @var array
+     * Middlewares associados à aplicação, sempre serão chamados.
      */
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
@@ -36,6 +39,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            //Permitir a chamada deste middleware ser atribuida a todas as rotas do grupo "web".
+            \App\Http\Middleware\LogAcessoMiddleware::class
+
         ],
 
         'api' => [
