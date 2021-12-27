@@ -14,7 +14,7 @@ class Kernel extends HttpKernel
      * These middleware are run during every request to your application.
      *
      * @var array
-     * Middlewares associados à aplicação, sempre serão chamados.
+     * Middlewares associados de modo global à toda a aplicação, sempre serão chamados.
      */
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            //Permitir a chamada deste middleware ser atribuida a todas as rotas do grupo "web".
+            //Permitir a chamada deste middleware ser atribuida a todas as rotas somente do grupo "web".
             \App\Http\Middleware\LogAcessoMiddleware::class
 
         ],
@@ -55,6 +55,8 @@ class Kernel extends HttpKernel
      *
      * These middleware may be assigned to groups or used individually.
      *
+     * Aqui colocando "apelidos"
+     *
      * @var array
      */
     protected $routeMiddleware = [
@@ -68,5 +70,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'log.acesso' => \App\Http\Middleware\LogAcessoMiddleware::class,
+        'autenticacao' => \App\Http\Middleware\AutenticacaoMiddleware::class
     ];
 }

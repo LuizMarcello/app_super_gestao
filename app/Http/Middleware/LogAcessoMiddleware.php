@@ -39,6 +39,24 @@ class LogAcessoMiddleware
            criadas acima, sem ter que ficar concatenando. */
         /* Salvando no banco de dados: */
         LogAcesso::create(['log' => "IP $ip requisitou a rota $rota"]);
-        return Response('Chegamos até o middleware e finalizamos no próprio middwlare');
+
+        //Assim a requisição vai para o próximo middleware encadeado, se houver.
+        //O "$next()" sempre empurra a requsição para a frente.
+        //return $next($request);
+
+        //Atribuindo à variável o retôrno de $next($request).
+         //O "$next()" sempre empurra a requisição para a frente, mas como retôrno, vem
+         //por ele também a resposta do processamento seguinte, que são devolvidas para os
+         //midlewares anteriormente encadeados.
+        $resposta = $next($request);
+
+        //Manipulandio a resposta do $next($request)
+        $resposta->setStatusCode(201, 'O status e o texto da resposta foram modificados.' );
+
+        return $resposta;
+
+        //dd($resposta);
+
+        //return Response('Chegamos até o middleware e finalizamos no próprio middwlare');
     }
 }

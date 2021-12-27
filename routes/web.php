@@ -22,8 +22,9 @@ use App\Http\Middleware\LogAcessoMiddleware;
 //São rotas "nomeadas"
 //Atribuindo a chamada deste middleware diretamente na rota.
 /* Route::middleware(LogAcessoMiddleware::class) */
-
-Route::get('/', 'PrincipalController@principal')->name('site.index'); /* Versão 7.0 do láravel */
+//Chamando este middleware aqui na rota, pelo seu "apelido" configurado em Kernel.php($routeMiddleware)
+Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware('log.acesso');
+/* Versão 7.0 do láravel */
 /* Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);
   Versão 8.0 do láravel */
 
@@ -33,7 +34,7 @@ Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos'); 
 
 //Atribuindo a chamada deste middleware diretamente na rota.
 Route::get('/contato', 'ContatoController@contato')->name('site.contato');
-    /* ->middleware(LogAcessoMiddleware::class); */ /* Versão 7.0 do láravel */
+/* ->middleware(LogAcessoMiddleware::class); */ /* Versão 7.0 do láravel */
 /* Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
 
@@ -41,20 +42,25 @@ Route::post('/contato', 'ContatoController@salvar')->name('site.contato'); /* Ve
 /* Route::post('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
   Versão 8.0 do láravel */
 
-Route::get('/login', function () {return 'Login';})->name('site.login');
+//Assim, vindo da url normal(get)
+Route::get('/login', 'LoginController@index')->name('site.login');
+
+//Assim, vindo do formulário(post)
+Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
 //Agrupando essas rotas. Serão "privadas" no sistema.
+//Só poderão ser usadas se o usuário estiver autenticado
 //Acrescentando o prefixo "app" no agrupamento.
 //São rotas nomeadas.
-Route::prefix('/app')->group(function () {
-    Route::get('/clientes', function () {
-        return 'Clientes';
-    })->name('app.clientes');
+//Terão middlewares com apelidos e encadeados.
+//Passando parâmetros para o middleware: O método handle() no midleware irá receber.
+Route::middleware('autenticacao:padrao,administrador,p3,p4')->prefix('/app')->group(function () {
+    Route::get('/clientes', function () { return 'Clientes'; })->name('app.clientes');
+
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
-    Route::get('/produtos', function () {
-        return 'produtos';
-    })->name('app.produtos');
-});
+
+    Route::get('/produtos', function () { return 'produtos'; })->name('app.produtos');
+ });
 
 //Encaminhando parâmetros da rota para o controlador:
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
