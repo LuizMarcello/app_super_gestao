@@ -28,7 +28,7 @@ Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware
 /* Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);
   Versão 8.0 do láravel */
 
-Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos'); /* Versão 7.0 do láravel */
+Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos'); /* Versão 7.0 do láravel*/
 /* Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos']);
   Versão 8.0 do láravel */
 
@@ -43,7 +43,8 @@ Route::post('/contato', 'ContatoController@salvar')->name('site.contato'); /* Ve
   Versão 8.0 do láravel */
 
 //Assim, vindo da url normal(get)
-Route::get('/login', 'LoginController@index')->name('site.login');
+//Com o interrogação, o parâmetro não é mais obrigatório.
+Route::get('/login/{erro?}', 'LoginController@index')->name('site.login');
 
 //Assim, vindo do formulário(post)
 Route::post('/login', 'LoginController@autenticar')->name('site.login');
