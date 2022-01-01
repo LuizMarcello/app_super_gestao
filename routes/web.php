@@ -56,11 +56,16 @@ Route::post('/login', 'LoginController@autenticar')->name('site.login');
 //Terão middlewares com apelidos e encadeados.
 //Passando parâmetros para o middleware: O método handle() no midleware irá receber.
 Route::middleware('autenticacao:padrao,administrador,p3,p4')->prefix('/app')->group(function () {
-    Route::get('/clientes', function () { return 'Clientes'; })->name('app.clientes');
 
-    Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
+    Route::get('/home', 'HomeController@index')->name('app.home');
 
-    Route::get('/produtos', function () { return 'produtos'; })->name('app.produtos');
+    Route::get('/sair', 'LoginController@sair')->name('app.sair');
+
+    Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
+
+    Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
+
+    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
  });
 
 //Encaminhando parâmetros da rota para o controlador:

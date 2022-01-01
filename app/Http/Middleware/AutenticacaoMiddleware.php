@@ -18,32 +18,14 @@ class AutenticacaoMiddleware
     {
         //A requisição veio do middlaware anterior(encadeado)
 
-        //Verifica se o usuário possui acesso a rota
-        echo $metodo_autenticacao . ' - ' . $perfil . '<br>';
+        //Iniciando a sessão do php
+        session_start();
 
-        if ($metodo_autenticacao == 'padrao') {
-            echo 'Verificar o usuário e senha no banco de dados' . $perfil . '<br>';
-        }
-
-        if ($metodo_autenticacao == 'ldap') {
-            echo 'Verificar o usuário e senha no AD' . $perfil . '<br>';
-        }
-
-        if ($perfil == 'visitante') {
-            echo $perfil . ', seu acesso será limitado <br>';
-        } else {
-            echo 'Você é ' . $perfil  . '. Iremos carregar seu perfil no banco de dados. <br>';
-        }
-
-        if (false) {
-            //Tendo acesso, a requisição é enviada para frente, para
-            //a aplicação(controller, no caso) ou para o próximo middleware
-            //encadeado, se houver.
-            //O "$next()" sempre empurra a requsição para a frente.
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
+            //A requisição será enviada para o passo seguinte.
             return $next($request);
         } else {
-            //return $next($request);
-            return Response('Acesso negado! Rota exige autenticação!!!');
+            return redirect()->route('site.login', ['erro' => 2]);
         }
     }
 }
