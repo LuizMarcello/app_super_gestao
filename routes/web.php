@@ -63,10 +63,20 @@ Route::middleware('autenticacao:padrao,administrador,p3,p4')->prefix('/app')->gr
 
     Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
 
+    //Rota "get": acessada diretamente pelo browser
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
 
+    //Rota "post": Que vem do formulário.
+    Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
+    
+    //Rota "get": acessada diretamente pelo browser
+    Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+
+    //Rota "post": Que vem do formulário
+    Route::post('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+
     Route::get('/produto', 'ProdutoController@index')->name('app.produto');
- });
+});
 
 //Encaminhando parâmetros da rota para o controlador:
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
