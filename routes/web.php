@@ -68,14 +68,26 @@ Route::middleware('autenticacao:padrao,administrador,p3,p4')->prefix('/app')->gr
 
     //Rota "post": Que vem do formulário.
     Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
-    
+
+    //Rota "get": acessada diretamente pelo browser (tbém paginação(paginate))
+    Route::get('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
+
     //Rota "get": acessada diretamente pelo browser
     Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
 
     //Rota "post": Que vem do formulário
     Route::post('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
 
-    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
+    //Parâmetros: id oprigatório e msg opcional
+    Route::get('/fornecedor/editar/{id}/{msg?}', 'FornecedorController@editar')->name('app.fornecedor.editar');
+
+    //Parâmetros: id oprigatório
+    Route::get('/fornecedor/excluir/{id}', 'FornecedorController@excluir')->name('app.fornecedor.excluir');
+
+    //Resource "produto"
+    //Porque o controller(ProdutoController) foi criado com o "resource"
+    //Uma única rota para todo o controller
+    Route::resource('produto', 'ProdutoController');
 });
 
 //Encaminhando parâmetros da rota para o controlador:

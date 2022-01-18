@@ -12,18 +12,29 @@ class FornecedorController extends Controller
         return view('app.fornecedor.index');
     }
 
-    public function listar()
+
+
+    public function listar(Request $request)
     {
-        return view('app.fornecedor.listar');
+        $fornecedores = Fornecedor::where('nome', 'like', '%' . $request->input('nome') . '%')
+            ->where('site', 'like', '%' . $request->input('site') . '%')
+            ->where('uf', 'like', '%' . $request->input('uf') . '%')
+            ->where('email', 'like', '%' . $request->input('email') . '%')
+            ->paginate(3);
+
+        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
     }
+
+
+
 
     public function adicionar(Request $request)
     {
         $msg = '';
 
         //Validando o token enviado pelo formulário (@csrf) (post/formulário)
-        //Se o token existir (não estiver vazio)
-        if ($request->input('_token') != '') {
+        //Será inclusão: Se o token existir (não estiver vazio) e se o "id" estiver vazio.
+        if ($request->input('_token') != '' && $request->input('id') == '') {
             //Validação dos dados
             //Array associativo
             $regras = [
@@ -56,6 +67,47 @@ class FornecedorController extends Controller
             $msg = 'Cadastro realizado com sucesso';
         }
 
-        return view('app.fornecedor.adicionar', ['msg' => $msg]) ;
+        //Validando o token enviado pelo formulário (@csrf) (post/formulário)
+        //Será edição: Se o token existir (não estiver vazio) e se o "id" for diferente de vazio.
+        if ($request->input('_token') != '' && $request->input('id') != '') {
+            $fornecedor = Fornecedor::find($request->input('id'));
+            $update = $fornecedor->update($request->all());
+
+            if ($update) {
+                $msg = 'Atualização realizada com sucesso';
+            } else {
+                $msg =  'Atualização apresentou problemas';
+            }
+
+            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
+        }
+
+        return view('app.fornecedor.adicionar', ['msg' => $msg]);
+    }
+
+    public function editar($id, $msg = '')
+    {
+        /* echo $id; */
+        $fornecedor = Fornecedor::find($id);
+
+        /*  dd($fornecedor); */
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
+    }
+
+    public function excluir($id)
+    {
+        /* Diferença: Aspas simples: tem que concatenar string com variável */
+        /* Aspas duplas: não precisa concatenar, faz a interpolação de string com variável */
+        /* echo 'Remover o registro de ID' . $id; */
+        /* echo "Remover o registro de ID $id"; */
+
+        /* Foi implementado o "softdelete" no model, então no bd, apenas será inserida
+           a data de exclusão na coluna específica. Continuará no bd  */
+        // Fornecedor::find($id)->delete();
+
+        /* Assim apagará definitivamente no bd, mesmo com softdelete. */
+        Fornecedor::find($id)->forceDelete();
+
+        return redirect()->route('app.fornecedor');
     }
 }
