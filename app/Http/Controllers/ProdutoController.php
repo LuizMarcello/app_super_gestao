@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Unidade;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -19,6 +20,8 @@ class ProdutoController extends Controller
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,8 +29,12 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        echo "create";
+        $unidades = Unidade::all();
+        //Passando para a view create.blade.php, '$unidades' como 2º parâmetro
+        return view('app.produto.create', ['unidades' => $unidades]);
     }
+
+
 
     /**
      * Store a newly created resource in storage.
