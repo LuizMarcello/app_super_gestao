@@ -32,6 +32,7 @@
                             <th>Unidade Id</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -43,9 +44,12 @@
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
                                 {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
+                                <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a>
+                                </td>
+                                {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
                                 <td><a href="">Excluir</a></td>
                                 {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
-                                <td><a href="">Editar</a></td>
+                                <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                             </tr>
                         @endforeach
                     </tbody>
