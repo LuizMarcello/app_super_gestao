@@ -96,9 +96,6 @@ class ProdutoController extends Controller
         return view('app.produto.show', ['produto' => $produto]);
     }
 
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -120,11 +117,29 @@ class ProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
+     *
+     * Verbos http. Requisições:
+     * PUT: Os dados que serão trafegados representam o objeto completo do lado do backend
+     *      Deve atualizar uma entidade por completo. Todos os atributos do objeto.
+     * PATCH: Atualiza os atributos parciais de um obejto. Partes de uma entidade.
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        //print_r($request->all()); //Representa o payload, os dados úteis da requisição htttp.
+                                    //A parte que interessa desta requisição.
+        //echo '<br><br><br>';
+
+        //print_r($produto->getAttributes());  //instância do objeto no estado anterior, antes dos
+                                               //dados serem enviados pelo formulário
+
+        /* Variável que contém a instância do objeto, recebendo os dados da requisição */
+        // Estes dados da requisição então irão atualizar potencialmente estes atributos no objeto.
+        $produto->update($request->all());
+        return redirect()->route('produto.show', ['produto' => $produto->id]);
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
