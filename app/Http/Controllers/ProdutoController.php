@@ -20,6 +20,7 @@ class ProdutoController extends Controller
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +34,7 @@ class ProdutoController extends Controller
         return view('app.produto.create', ['unidades' => $unidades]);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -106,10 +108,8 @@ class ProdutoController extends Controller
     {
         $unidades = Unidade::all();
         return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        //return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
     }
-
-
-
 
     /**
      * Update the specified resource in storage.
@@ -126,17 +126,18 @@ class ProdutoController extends Controller
     public function update(Request $request, Produto $produto)
     {
         //print_r($request->all()); //Representa o payload, os dados úteis da requisição htttp.
-                                    //A parte que interessa desta requisição.
+        //A parte que interessa desta requisição.
         //echo '<br><br><br>';
 
         //print_r($produto->getAttributes());  //instância do objeto no estado anterior, antes dos
-                                               //dados serem enviados pelo formulário
+        //dados serem enviados pelo formulário
 
         /* Variável que contém a instância do objeto, recebendo os dados da requisição */
         // Estes dados da requisição então irão atualizar potencialmente estes atributos no objeto.
         $produto->update($request->all());
         return redirect()->route('produto.show', ['produto' => $produto->id]);
     }
+
 
 
 
@@ -149,6 +150,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        return redirect()->route('produto.index', ['produto' => $produto->id]);
     }
 }

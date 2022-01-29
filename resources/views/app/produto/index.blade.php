@@ -37,17 +37,32 @@
                     </thead>
 
                     <tbody>
+                        {{-- Percorrendo um array de objetos do tipo "produtos" --}}
                         @foreach ($produtos as $produto)
                             <tr>
                                 <td>{{ $produto->nome }}</td>
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
+
+                                {{-- Visualizando o item --}}
                                 {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
-                                <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a>
+                                <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
+
+                                {{-- Deletando o item --}}
+                                {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
+                                <td>
+                                    <form id="form_{{ $produto->id }}" method="POST" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        {{-- Submetendo o formulário com submit--}}
+                                        {{--  <button type="submit">Excluir</button> --}}
+                                        {{-- ou assim com link e usando javascript --}}
+                                        <a href="#" onclick="document.getElementById('form_{{ $produto->id }}').submit()">Excluir</a>
+                                    </form>
                                 </td>
-                                {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
-                                <td><a href="">Excluir</a></td>
+
+                                {{-- Editando o item --}}
                                 {{-- Sempre que clicamos num link, usamos o verbo "GET" --}}
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                             </tr>

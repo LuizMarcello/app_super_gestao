@@ -10,7 +10,14 @@
     <div class="conteudo-pagina">
 
         <div class="titulo-pagina-2">
+            {{-- Esta view antes era usada para "inclusão" e "edição"
+                 se o "id" estiver definido, significa que é "edição"
+                 Ambas as funções ficavam só nessa view --}}
+            {{-- @if (isset($produto->id))
+                <p>Editar Produto</p>
+            @else --}}
             <p>Adicionar Produto</p>
+            {{-- @endif --}}
         </div>
 
         <div class="menu">
@@ -21,33 +28,13 @@
         </div>
 
         <div class="informacao-pagina">
-
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
-                <form method="POST" action="{{ route('produto.store') }}">
-                    @csrf
-                    <input type="text" name="nome" value="{{ old('nome') }}" placeholder="Nome" class="borda-preta">
-                    {{ $errors->has('nome') ? $errors->first('nome') : '' }}
-
-                    <input type="text" name="descricao" value="{{ old('descricao') }}" placeholder="Descrição"
-                        class="borda-preta">
-                    {{ $errors->has('descricao') ? $errors->first('descricao') : '' }}
-
-                    <input type="text" name="peso" value="{{ old('peso') }}" placeholder="Peso" class="borda-preta">
-                    {{ $errors->has('peso') ? $errors->first('peso') : '' }}
-
-                    {{-- Campo "Unidade de medida é estrangeiro" Model Unidade --}}
-                    <select name="unidade_id">
-                        <option>-- Selecione a Unidade de Medida --</option>
-                        @foreach ($unidades as $unidade)
-                            <option value="{{ $unidade->id }}"
-                                {{ old('unidade_id') == $unidade->id ? 'selected' : '' }}>{{ $unidade->descricao }}
-                            </option>
-                        @endforeach
-                    </select>
-                    {{ $errors->has('unidade_id') ? $errors->first('unidade_id') : '' }}
-
-                    <button type="submit" class="borda-preta">Cadastrar</button>
-                </form>
+                {{-- Todas as variáveis utilizadas no contexto de uma view que está sendo
+                     incluída como um componente, precisam ser encaminhas juntamente ao
+                     referido componente, como 2º parâmetro, em um array associativo --}}
+                @component('app.produto._components.form_create_edit', ['unidades' => $unidades])
+                    {{-- Aqui ficava o formulário. Virou um componente --}}
+                @endcomponent
             </div>
         </div>
 
